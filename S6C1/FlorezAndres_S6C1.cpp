@@ -33,7 +33,7 @@ int main(){
     {
         tiempo[i] = tiempo[i-1] + dt;
         x[i] = x[i-1] + dx;
-        ampl_x[i] = u(x[i],x_min,x_max);
+        ampl_x[i] = u(x[i],x1_init,x2_init);
         
         std:: cout<<x[i]<<","<<ampl_x[i]<< std::endl;
     }
