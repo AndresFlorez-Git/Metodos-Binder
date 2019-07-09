@@ -82,7 +82,7 @@ int main()
     // Paso inmediato al inicio
     for(int i = 1; i<= puntos; i++)
     {
-       presente[i] = ((c*c*dt*dt)/(dx*dx)) * (pasado[i+1] + pasado[i-1] - 2*pasado[i]) + 2*pasado[i];
+       presente[i] = ((c*c*dt*dt)/(dx*dx*2)) * (pasado[i+1] + pasado[i-1] - 2*pasado[i]) + pasado[i];
     }
     
     // Construimos el futuro

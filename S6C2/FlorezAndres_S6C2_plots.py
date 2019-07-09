@@ -29,7 +29,7 @@ def plot_for_offset(i, data):
     ax.set(xlabel='X en el tiempo ={}'.format(i), ylabel='Amplitud',
            title='Evolución del Sitema')
 
-    ax.set_ylim(-3, 3)
+    ax.set_ylim(-0.02, 0.02)
 
     # Used to return the plot as an image rray
     fig.canvas.draw()       # draw the canvas, cache the renderer
