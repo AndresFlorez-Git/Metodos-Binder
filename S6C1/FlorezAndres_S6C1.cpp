@@ -48,13 +48,18 @@ int main(){
     double presente[N];
     double futuro[N];
     
-    
-    
+    double cto = 1;
     for(int i = 1; i < N; i++)
     {
      for (int j = 1; j < N; j++)
      {
-         solucion[i][j] = (vel*dt/dx)*(solucion[i][j-1] - solucion[i-1][j-1]) + solucion[i][j-1];
+         /*
+         solucion[i][j] = (vel*dt/dx)*(u(solucion[i][j-1],x1_init+dx*j,x2_init+dx*j) - u(solucion[i-1][j-1],x1_init+dx*j,x2_init+dx*j)) + u(solucion[i][j-1],x1_init+dx*j,x2_init+dx*j);
+         */
+         solucion[i][j] = u((vel*dt/dx)*(solucion[i][j-1] - solucion[i-1][j-1]) + solucion[i][j-1],x1_init+dx*j,x2_init+dx*j);
+         
+         
+         
      }
     }
    
