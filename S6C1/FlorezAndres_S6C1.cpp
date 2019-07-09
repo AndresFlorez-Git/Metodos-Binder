@@ -22,10 +22,13 @@ int main(){
     double tiempo[N]; 
     double x[N];
     double ampl_x [N];
+    
+    double solucion[N][N+1];
 /* Valores iniciales de los arreglos */
     
     tiempo [0] = t_init;
     x[0] = 0;
+    solucion[0][0] = 1;
     
      
 /* Se rellenan esos espacios los espacios*/
@@ -34,14 +37,42 @@ int main(){
         tiempo[i] = tiempo[i-1] + dt;
         x[i] = x[i-1] + dx;
         ampl_x[i] = u(x[i],x1_init,x2_init);
+        solucion[i][N] =  x[i];
+        solucion[i][0] =  ampl_x[i];
+        solucion[0][i] = 1;
         
-        std:: cout<<x[i]<<","<<ampl_x[i]<< std::endl;
+        //std:: cout<<x[i]<<","<<ampl_x[i]<< std::endl;
     }
 /* Evolucion del sistema*/
+    double pasado[N];
+    double presente[N];
+    double futuro[N];
     
     
-    //for(int t = 1; t < N)
+    
+    for(int i = 1; i < N; i++)
+    {
+     for (int j = 1; j < N; j++)
+     {
+         solucion[i][j] = (vel*dt/dx)*(solucion[i][j-1] - solucion[i-1][j-1]) + solucion[i][j-1];
+     }
+    }
    
+    /* Imprimir valores */
+    
+    for(int i = 0; i < N; i++)
+    {
+     for (int j = 0; j <= N; j++)
+     {
+         std:: cout<<solucion[i][j]<<",";
+     }
+        std::cout<< std::endl;  
+    }
+    
+     
+  
+    
+    
     return 0;
     
 }

@@ -3,8 +3,9 @@ import matplotlib.pyplot as plt
 
 data = np.genfromtxt("datos.dat",delimiter=",")
 
+
 plt.figure(0,figsize=(10,10))
-plt.plot(data[:,0],data[:,1], label='Amplitud')
+plt.plot(data[:,len(data[0,:])-2],data[:,0], label='Amplitud')
 
 
 plt.legend(loc = 0)
