@@ -29,7 +29,7 @@ def plot_for_offset(i, data):
     ax.set(xlabel='X en el tiempo ={}'.format(i), ylabel='Amplitud',
            title='Evolución del Sitema')
 
-    ax.set_ylim(-0.02, 0.02)
+    ax.set_ylim(-0.03, 0.03)
 
     # Used to return the plot as an image rray
     fig.canvas.draw()       # draw the canvas, cache the renderer
@@ -39,4 +39,4 @@ def plot_for_offset(i, data):
     return image
 
 kwargs_write = {'fps':20.0, 'quantizer':'nq'}
-imageio.mimsave('./Evolucion_Sistema_resueltoCaso3.gif', [plot_for_offset(i, data) for i in range(1,len(data[0,:]+200))], fps=20)
+imageio.mimsave('./Evolucion_Sistema_resueltoCaso_casa.gif', [plot_for_offset(i, data) for i in range(1,len(data[0,:]+200))], fps=20)

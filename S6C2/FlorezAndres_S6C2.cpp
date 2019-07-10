@@ -5,14 +5,22 @@ double Pi = 3.141592653589793238;
 double recta(double, double, double);
 double funCaso3(double ,double,  double, double);
 
+/*#############################################################*/
+
+// Ingresar el caso de estudio deseado:
+
+int caso = 3;
+
+/*#############################################################*/
+
 int main()
 {
     /* Constantes iniciales del problema*/
     double Longitud = 1;
-    double dx = 0.005;
+    double dx = 0.01;
     double c = 300;
     double t_init = 0;
-    double t_finit = 0.1;
+    double t_finit = 3;
     int puntos = Longitud/dx;
     double A0 = 0.01;
     double dt = (dx/c)*0.25;
@@ -31,7 +39,7 @@ int main()
     
     
     /* Casos de estudio */
-    int caso = 3;
+    
     
     //Caso 1:tome condiciones de frontera fijas
     if(caso == 1)
@@ -122,7 +130,7 @@ int main()
     for (int t = 0; t<= puntosTemporales; t++)
     {
         
-         if(cto == 0 || cto % 5 == 0)
+         if(cto == 0 || cto % 20 == 0)
         {
              for (int i = 0; i<=puntos;i++)
              {
@@ -172,5 +180,5 @@ double recta(double m, double x, double b)
 
 double funCaso3(double A0, double t, double c, double L)
 {
- return A0 * cos(3.0 * c * t *Pi/L); 
+ return A0 * sin(3.0 * c * t *Pi/L); 
 }
