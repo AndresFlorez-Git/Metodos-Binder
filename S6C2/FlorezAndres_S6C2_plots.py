@@ -39,4 +39,4 @@ def plot_for_offset(i, data):
     return image
 
 kwargs_write = {'fps':20.0, 'quantizer':'nq'}
-imageio.mimsave('./Evolucion_Sistema_resuelto.gif', [plot_for_offset(i, data) for i in range(1,len(data[0,:]+200))], fps=20)
+imageio.mimsave('./Evolucion_Sistema_resueltoCaso3.gif', [plot_for_offset(i, data) for i in range(1,len(data[0,:]+200))], fps=20)
