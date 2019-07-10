@@ -7,7 +7,7 @@ data = np.genfromtxt("datos.dat",delimiter=",")
 
 
 plt.figure(0,figsize=(10,10))
-plt.plot(data[:,len(data[0,:])-2],data[:,0], label='Sistema')
+plt.plot(data[0,0:len(data[0,:])-1],data[1,0:len(data[0,:])-1], label='Sistema')
 plt.title('Condicion inicial del Sistema')
 plt.ylabel('Amplitud')
 plt.xlabel('x en tiempo = 0')
@@ -20,8 +20,8 @@ plt.savefig('FlorezAndres.png')
 
 def plot_for_offset(i, data):
     # Data for plotting
-    t = data[:,len(data[0,:])-2]
-    s = data[:,i]
+    t = data[0,0:len(data[0,:])-1]
+    s = data[i,0:len(data[0,:])-1]
 
     fig, ax = plt.subplots(figsize=(10,5))
     ax.plot(t, s)
@@ -29,7 +29,7 @@ def plot_for_offset(i, data):
     ax.set(xlabel='X en el tiempo ={}'.format(i), ylabel='Amplitud',
            title='Evolución del Sitema')
 
-    ax.set_ylim(0, 3)
+    ax.set_ylim(-0, 3)
 
     # Used to return the plot as an image rray
     fig.canvas.draw()       # draw the canvas, cache the renderer
@@ -38,8 +38,6 @@ def plot_for_offset(i, data):
 
     return image
 
-kwargs_write = {'fps':3.0, 'quantizer':'nq'}
-imageio.mimsave('./Evolucion_Sistema_resuelto.gif', [plot_for_offset(i*2, data) for i in range(5)], fps=3)
-
-
+kwargs_write = {'fps':20.0, 'quantizer':'nq'}
+imageio.mimsave('./Evolucion_Sistema_resuelto.gif', [plot_for_offset(i, data) for i in range(1,40)], fps=20)
 
