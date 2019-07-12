@@ -58,6 +58,7 @@ int main(){
         {
             Datos_inicio<<matriz[i][j]<<",";
             presente[i][j] = matriz[i][j];
+            futuro[i][j] = matriz[i][j];
         }
         Datos_inicio<<endl;
     }
@@ -92,13 +93,16 @@ int main(){
             {
                     for (int j = 0; j< puntos; j++)
                     {
-                        if (i>0 && j >0)
+                        if (i>0 && j >0 && i<puntos-1 && j<puntos-1)
                         {
                             futuro[i][j] = (v*dt/(dx*dx))*(presente[i+1][j] + presente[i-1][j] -4*presente[i][j] + presente[i][j+1] + presente[i][j-1]) + presente[i][j];
                         }
                         else 
                         {
-                         futuro[i][j]= presente[i][j];   
+                         futuro[0][j] = futuro[puntos-1][j];
+                         futuro[puntos-1][j] = futuro[0][j];
+                         futuro[i][0] = futuro[i][puntos-1];
+                         futuro[i][puntos-1] = futuro[i][0];
                         }
                         
                     }
