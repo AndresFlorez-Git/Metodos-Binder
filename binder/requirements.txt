@@ -4,4 +4,5 @@ pandas
 vdom
 matplotlib
 imageio
+scipy
 jupyterlab_launcher>=0.5.0
