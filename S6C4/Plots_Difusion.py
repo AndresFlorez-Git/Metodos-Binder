@@ -28,7 +28,7 @@ z_evolucion_periodica2 = data_Evolucion_periodica[50*100+1*50:50*100+100+1*50,:]
 z_evolucion_periodica3 = data_Evolucion_periodica[100*100+1*100:100*100+100+1*100,:] 
 
 z_evolucion_FronteraFija1 = Datos_Evolucion_FronteraFija[101:201,:] 
-z_evolucion_FronteraFija2 = Datos_Evolucion_FronteraFija[50*100+1*50:50*100+100+1*50,:] 
+z_evolucion_FronteraFija2 = Datos_Evolucion_FronteraFija[3*100+1*3:3*100+100+1*3,:] 
 z_evolucion_FronteraFija3 = Datos_Evolucion_FronteraFija[100*100+1*100:100*100+100+1*100,:] 
 
 

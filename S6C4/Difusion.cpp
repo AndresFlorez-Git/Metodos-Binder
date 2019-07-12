@@ -125,10 +125,24 @@ int main(){
     
      /* Evolución del sistema caso frontera fija -----------------------------------------------------------------------------*/
     
+    
    
         // Construimos el futuro
+    
+    
+        for(int i = 0; i< puntos;i++)
+        {
+            for(int j = 0; j< puntos;j++)
+            {
+                presente[i][j] = matriz[i][j];
+                futuro[i][j] = matriz[i][j];
+            }
+        }
+    
+    
         Datos_Evolucion_FronteraFija.open("Datos_Evolucion_FronteraFija.dat");
         cto = 0;
+    
         for (int t = 0; t<= puntosTemporales; t++)
         {
             
@@ -156,10 +170,20 @@ int main(){
                         {
                             futuro[i][j] = (v*dt/(dx*dx))*(presente[i+1][j] + presente[i-1][j] -4*presente[i][j] + presente[i][j+1] + presente[i][j-1]) + presente[i][j];
                         }
-                        else 
-                        {
-                         futuro[i][j]= 50;   
-                        }
+                        
+                        
+                    }
+                
+            }
+            
+            for (int i = 0; i<puntos;i++ )
+            {
+                    for (int j = 0; j< puntos; j++)
+                    {
+                        futuro[0][j] = 50;
+                        futuro[puntos-1][j] = 50;
+                        futuro[i][0] = 50;
+                        futuro[i][puntos-1] = 50;
                         
                     }
                 
