@@ -29,8 +29,8 @@ int main(){
     /*Archivos de salida*/
     
     ofstream Datos_inicio;
-    ofstream Datos_evolucion;
-    
+    ofstream Datos_Evolucion_Periodico;
+    ofstream Datos_Evolucion_FronteraFija;
     
     
     
@@ -63,14 +63,11 @@ int main(){
     }
     Datos_inicio.close();
     
-     /* Evolución del sistema -----------------------------------------------------------------------------*/
+     /* Evolución del sistema caso periodico -----------------------------------------------------------------------------*/
     
    
-        
-            
-        
         // Construimos el futuro
-    Datos_evolucion.open("Datos_Evolucion.dat");
+        Datos_Evolucion_Periodico.open("Datos_Evolucion_Periodico.dat");
         int cto = 0;
         for (int t = 0; t<= puntosTemporales; t++)
         {
@@ -81,10 +78,10 @@ int main(){
                  {
                      for(int j = 0; j< puntos; j++)
                      {
-                        Datos_evolucion<<presente[i][j]<<",";
+                        Datos_Evolucion_Periodico<<presente[i][j]<<",";
                          
                      }
-                  Datos_evolucion<<std::endl; 
+                  Datos_Evolucion_Periodico<<endl; 
                  }
              
                  
@@ -120,7 +117,63 @@ int main(){
            cto = cto+1;
         }
     
-    Datos_evolucion.close();
+    Datos_Evolucion_Periodico.close();
+    
+     /* Evolución del sistema caso frontera fija -----------------------------------------------------------------------------*/
+    
+   
+        // Construimos el futuro
+        Datos_Evolucion_FronteraFija.open("Datos_Evolucion_FronteraFija.dat");
+        cto = 0;
+        for (int t = 0; t<= puntosTemporales; t++)
+        {
+            
+             if(cto == 0 || cto % 20 == 0)
+            {
+                 for (int i = 0; i<puntos;i++)
+                 {
+                     for(int j = 0; j< puntos; j++)
+                     {
+                        Datos_Evolucion_FronteraFija<<presente[i][j]<<",";
+                         
+                     }
+                  Datos_Evolucion_FronteraFija<<endl; 
+                 }
+             
+                 
+            }
+            
+            
+            for (int i = 0; i<puntos;i++ )
+            {
+                    for (int j = 0; j< puntos; j++)
+                    {
+                        if (i>0 && j >0 && i <puntos-1 && j <puntos-1)
+                        {
+                            futuro[i][j] = (v*dt/(dx*dx))*(presente[i+1][j] + presente[i-1][j] -4*presente[i][j] + presente[i][j+1] + presente[i][j-1]) + presente[i][j];
+                        }
+                        else 
+                        {
+                         futuro[i][j]= 50;   
+                        }
+                        
+                    }
+                
+            }
+            
+            for(int i = 0; i<puntos; i++)
+            {
+                for (int j = 0; j< puntos; j++)
+                {
+                    pasado[i][j] = presente[i][j];
+                    presente[i][j]= futuro[i][j];
+                }
+            }
+            
+           cto = cto+1;
+        }
+    
+    Datos_Evolucion_FronteraFija.close();
     
     return 0;
 }
