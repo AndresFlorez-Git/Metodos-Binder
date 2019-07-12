@@ -110,6 +110,6 @@ plt.ylabel('Y [cm]',fontsize=15)
 ax.set_zlabel('T [°C]',fontsize=15)
 
 
-plt.savefig('Evolucion_sistema_periodica.png')
+plt.savefig('Evolucion_sistema_FronteraFija.png')
 
 
