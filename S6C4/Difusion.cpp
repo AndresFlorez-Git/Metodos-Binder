@@ -91,11 +91,19 @@ int main(){
             }
             
             
-            for (int i = 1; i<puntos;i++ )
+            for (int i = 0; i<puntos;i++ )
             {
-                    for (int j = 1; j< puntos; j++)
+                    for (int j = 0; j< puntos; j++)
                     {
-                        futuro[i][j] = (v*dt/(dx*dx))*(presente[i+1][j] + presente[i-1][j] -4*presente[i][j] + presente[i][j+1] + presente[i][j-1]) + presente[i][j];
+                        if (i>0 && j >0)
+                        {
+                            futuro[i][j] = (v*dt/(dx*dx))*(presente[i+1][j] + presente[i-1][j] -4*presente[i][j] + presente[i][j+1] + presente[i][j-1]) + presente[i][j];
+                        }
+                        else 
+                        {
+                         futuro[i][j]= presente[i][j];   
+                        }
+                        
                     }
                 
             }
