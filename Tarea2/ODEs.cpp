@@ -29,7 +29,7 @@ int main(){
     
     double t_init = 0;
     double t_finit = 20;
-    double h = 0.01; // delta temporal nominal
+    double h = 0.001; // delta temporal nominal
     int puntos = (t_finit - t_init)/h +1;
     
     
@@ -48,7 +48,7 @@ double Dx(double v)
 
 double Dv(double r, double mag_r)
 {
-    return -G*1*r/(mag_r*mag_r*mag_r);
+    return -G*1.0*r/(mag_r*mag_r*mag_r);
 }
 /*
 double Euler()
@@ -67,7 +67,7 @@ double Runge_Kutta(double X0, double Y0, double vX0, double vY0, double h, doubl
     double t[puntos];
     double r[puntos][2];
     double v[puntos][2];
-    cout<<"1";
+  
          
     /* Condiciones iniciales del problema:*/
     
@@ -76,7 +76,7 @@ double Runge_Kutta(double X0, double Y0, double vX0, double vY0, double h, doubl
     r[0][1] = Y0;
     v[0][0] = vX0;
     v[0][1] = vY0;
-    cout<<"1";
+    
     
     /* Declaración de variables auxiliares ki asociadas al método de Runge Kutta*/
     //Nota: las variables K que tienen un solo sub-indice, estan asociadas a la ecuacion diferencial dx(t)/d(t) = v(t)
@@ -104,7 +104,7 @@ double Runge_Kutta(double X0, double Y0, double vX0, double vY0, double h, doubl
     double v2x, v2y;
     double v3x, v3y;
     
-    cout<<"1";
+    
     /* Evolución del sistema */
     
     for(int i = 1 ; i< puntos;  i++)
@@ -147,23 +147,27 @@ double Runge_Kutta(double X0, double Y0, double vX0, double vY0, double h, doubl
         k4y = Dx(v3y);
         k44x= Dv(r3x,pow(r3x*r3x+r3y*r3y,0.5));
         k44y= Dv(r3y,pow(r3x*r3x+r3y*r3y,0.5));
-    
         
-        prom1x = (1/6)*(k1x + 2*k2x + 2*k3x + k4x);
-        prom1y = (1/6)*(k1y + 2*k2y + 2*k3y + k4y);
-        prom2x = (1/6)*(k11x + 2*k22x + 2*k33x + k44x);
-        prom2y = (1/6)*(k11y + 2*k22y + 2*k33y + k44y);
+        //cout<<k11x<<","<<k11y<<"|"<<k22x<<","<<k22y<<"|"<<k33x<<","<<k33y<<endl;
+        prom1x = (1.0/6.0)*(k1x + 2.0*k2x + 2.0*k3x + k4x);
+        prom1y = (1.0/6.0)*(k1y + 2.0*k2y + 2.0*k3y + k4y);
+        prom2x = (1.0/6.0)*(k11x + 2.0*k22x + 2.0*k33x + k44x);
+        prom2y = (1.0/6.0)*(k11y + 2.0*k22y + 2.0*k33y + k44y);
     
         t[i] = t[i-1] + h;
         r[i][0] = r[i-1][0] + h * prom1x;
         r[i][1] = r[i-1][1] + h * prom1y;    
         v[i][0]= v[i-1][0] + h * prom2x;
         v[i][1]= v[i-1][1] + h * prom2y;
-            
+        /*if (t[i]>14.5)
+        {
+                cout<<t[i]<<" | "<<r[i][0]<<" | "<<r[i][1]<<" | "<<v[i][0]<<" | "<<v[i][1]<<" | "<<prom1x <<" | "<< prom1y<<" | " <<prom1x<<" | " << prom1y <<endl ;
+        }*/
     }
+    
     for(int i = 0; i< puntos; i++)
     {
-         cout<<t[i]<<","<<r[i][0]<<","<<r[i][1]<<v[i][0]<<","<<v[i][1]<< endl ;
+         cout<<t[i]<<","<<r[i][0]<<","<<r[i][1]<<","<<v[i][0]<<","<<v[i][1]<< endl ;
     }
    
 }
