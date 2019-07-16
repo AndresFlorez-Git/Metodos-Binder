@@ -70,10 +70,10 @@ plt.colorbar()
 #-------------------------------------------------------------------
 # Se aplica el filtro:
 
-FiltrofourieFotoFeliz = filtroPasaAltas(fourieFotoFeliz,70)
+FiltrofourieFotoFeliz = filtroPasaAltas(FiltrofourieFotoFeliz,50)
 
 
-FiltrofourieFotoSeria = filtroPasaBajas(fourieFotoSeria,30)
+FiltrofourieFotoSeria = filtroPasaBajas(FiltrofourieFotoSeria,50)
 #---------------------------------------------------------------------
 plt.subplot(6,2,7)
 plt.imshow(abs(FiltrofourieFotoFeliz),cmap = 'plasma',norm = LogNorm())
