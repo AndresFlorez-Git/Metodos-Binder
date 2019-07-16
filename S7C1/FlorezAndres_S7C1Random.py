@@ -103,6 +103,11 @@ for i in range(0,100):
                 unifomreY[j] = unifomreY[j] + pasoy - 30.5
             else:
                 unifomreY[j] = abs(unifomreY[j] + pasoy)
+        if unifomreX[j]<0:
+            unifomreX[j] = abs(unifomreX[j])
+        if unifomreY[j]<0:
+            unifomreY[j] = abs(unifomreY[j])
+           
         #print(unifomreX[j],pasox,'',unifomreY[j],pasoy)
 #----------------------------------------------------------------
 plt.subplot(2,1,2)
