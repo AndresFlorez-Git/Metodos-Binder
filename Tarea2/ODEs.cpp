@@ -28,9 +28,9 @@ int main(){
     /*Tiempos inicial y final*/
     
     double t_init = 0;
-    double t_finit = orbitas/20;
-    double h = 1/365; // delta temporal nominal
-    int puntos = (t_finit - t_init)/h;
+    double t_finit = 20;
+    double h = 0.01; // delta temporal nominal
+    int puntos = (t_finit - t_init)/h +1;
     
     
     Runge_Kutta(X0, Y0, vX0, vY0, h, t_init, t_finit, puntos, cto);
@@ -48,7 +48,7 @@ double Dx(double v)
 
 double Dv(double r, double mag_r)
 {
-    return -G*1*r/pow(mag_r,3);
+    return -G*1*r/(mag_r*mag_r*mag_r);
 }
 /*
 double Euler()
