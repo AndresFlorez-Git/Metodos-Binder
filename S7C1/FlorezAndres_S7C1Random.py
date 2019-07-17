@@ -45,12 +45,12 @@ plt.ylabel('y')
 plt.savefig('cuadrado.pdf')
 
 # Genere puntos aleatorios distribuidos uniformemente dentro de circulo de radio 23. Grafique sus puntos y guarde la grafica sin mostrarla en un archivo llamado circulo.pdf. 
-x = np.linspace(-23*0.5,23*0.5,1000)
+x = np.linspace(-(23),23,1000)
 
 
-unifomreX = np.random.uniform(-23*0.5,23*0.5,10000)
-unifomreY = np.random.uniform(-23*0.5,23*0.5,10000)
-i = np.where(unifomreX**2+unifomreY**2<=23)
+unifomreX = np.random.uniform(-(23),23,10000)
+unifomreY = np.random.uniform(-(23),23,10000)
+i = np.where(unifomreX**2+unifomreY**2<=23**2)
 
 plt.figure(3,figsize = (10,10))
 plt.scatter(unifomreX[i],unifomreY[i])
@@ -297,10 +297,31 @@ plt.savefig('sigmaCaminata.pdf')
 #Condiciones iniciales:
 #Cafe: 10000 particulas distribuidas uniformemente dentro de un circulo de radio igual a raiz de 230
 #Crema: 100 particulas distribuidas uniformemente dentro de un circulo de radio igual a raiz de 2
+
 #
 #Nota: si su codigo se esta demorando mucho en correr, puede usar 1000 particulas de cafe en vez de 10000.
 #
 # 1) Haga una grafica de las condiciones iniciales donde los dos tipos de particulas tengan distintos colores. Guarde dicha grafica sin mostrarla en CafeLecheIni.pdf
+x = np.linspace(-(230.0**0.5),230.0**0.5,1000)
+y = (230.0-x**2)**0.5
+
+unifomreXGrande = np.random.uniform(-(230.0**0.5),230**0.5,10000)
+unifomreYGrande = np.random.uniform(-(230.0**0.5),230**0.5,10000)
+i = np.where(unifomreXGrande**2+unifomreYGrande**2<=230)
+
+unifomreXPequeno = np.random.uniform(-(2**0.5),2**0.5,100)
+unifomreYPequeno = np.random.uniform(-(2**0.5),2**0.5,100)
+j = np.where(unifomreXPequeno**2+unifomreYPequeno**2<=2)
+
+plt.figure(5,figsize = (10,10))
+plt.scatter(unifomreXGrande[i],unifomreYGrande[i],c = 'sienna',label ='cafe')
+plt.scatter(unifomreXPequeno[j],unifomreYPequeno[j], c= 'wheat',label= 'leche')
+plt.plot(x,y,x,-y,c='black',label ='taza')
+plt.title('Puntos dentro de circulo por distribución uniforme')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend(loc=0)
+plt.savefig('CafeLecheIni.pdf')
 #
 #2) Todas las particulas deben hacer una caminata aleatoria de 1000 pasos. Los pasos en las coordenadas x y deben seguir una distribucion gausiana de sigma 2.5. Si va a usar coordenadas polares elija un sigma apropiado.
 #
