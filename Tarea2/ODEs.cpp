@@ -76,8 +76,8 @@ double Euler(double X0, double Y0, double vX0, double vY0, double h, double t_in
         {
             r[i][0] = r[i-1][0] + v[i-1][0]*h;
             r[i][1] = r[i-1][1] + v[i-1][1]*h;
-            v[i][0] = v[i-1][0] + Dv(r[i][0],pow(r[i][0]*r[i][0]+r[i][1]*r[i][1],0.5));
-            v[i][1] = v[i-1][1] + Dv(r[i][1],pow(r[i][0]*r[i][0]+r[i][1]*r[i][1],0.5));
+            v[i][0] = v[i-1][0] + Dv(r[i-1][0],pow(r[i-1][0]*r[i-1][0]+r[i-1][1]*r[i-1][1],0.5));
+            v[i][1] = v[i-1][1] + Dv(r[i-1][1],pow(r[i-1][0]*r[i-1][0]+r[i-1][1]*r[i-1][1],0.5));
             t[i] = t[i-1] + h;
         }
         for(int i = 0; i< puntos; i++)
