@@ -305,17 +305,21 @@ plt.savefig('sigmaCaminata.pdf')
 x = np.linspace(-(230.0**0.5),230.0**0.5,1000)
 y = (230.0-x**2)**0.5
 
-unifomreXGrande = np.random.uniform(-(230.0**0.5),230**0.5,10000)
-unifomreYGrande = np.random.uniform(-(230.0**0.5),230**0.5,10000)
-i = np.where(unifomreXGrande**2+unifomreYGrande**2<=230)
+uniformeXGrande = np.random.uniform(-(230.0**0.5),230**0.5,10000)
+uniformeYGrande = np.random.uniform(-(230.0**0.5),230**0.5,10000)
+p = np.where(uniformeXGrande**2+uniformeYGrande**2<=230)
+uniformeXGrande = uniformeXGrande[p]
+uniformeYGrande = uniformeYGrande[p]
 
-unifomreXPequeno = np.random.uniform(-(2**0.5),2**0.5,100)
-unifomreYPequeno = np.random.uniform(-(2**0.5),2**0.5,100)
-j = np.where(unifomreXPequeno**2+unifomreYPequeno**2<=2)
+uniformeXPequeno = np.random.uniform(-(2**0.5),2**0.5,100)
+uniformeYPequeno = np.random.uniform(-(2**0.5),2**0.5,100)
+k = np.where(uniformeXPequeno**2+uniformeYPequeno**2<=2)
+uniformeXPequeno = uniformeXPequeno[k]
+uniformeYPequeno = uniformeYPequeno[k]
 
 plt.figure(5,figsize = (10,10))
-plt.scatter(unifomreXGrande[i],unifomreYGrande[i],c = 'sienna',label ='cafe')
-plt.scatter(unifomreXPequeno[j],unifomreYPequeno[j], c= 'wheat',label= 'leche')
+plt.scatter(uniformeXGrande,uniformeYGrande,c = 'sienna',label ='cafe')
+plt.scatter(uniformeXPequeno,uniformeYPequeno, c= 'wheat',label= 'crema')
 plt.plot(x,y,x,-y,c='black',label ='taza')
 plt.title('Puntos dentro de circulo por distribución uniforme')
 plt.xlabel('x')
@@ -325,10 +329,59 @@ plt.savefig('CafeLecheIni.pdf')
 #
 #2) Todas las particulas deben hacer una caminata aleatoria de 1000 pasos. Los pasos en las coordenadas x y deben seguir una distribucion gausiana de sigma 2.5. Si va a usar coordenadas polares elija un sigma apropiado.
 #
+
+    
 #3) Condiciones de frontera: implemente unas condiciones tales que si la particulas "sale" del circulo, usted vuelva a dar el paso. Si no puede implementar solo las condiciones antes descritas, debe al menos escribir comentarios explicando que hace cada linea de codigo de las condiciones propuestas (comentado abajo)
 #
+
 # 4) Haga una grafica de las posiciones finales de las particulas despues de la caminata donde los dos tipos de particulas tengan distintos colores. Guarde dicha grafica sin mostrarla en CafeLecheFin.pdf
 #
+
+
+#---------------------------------------------------------
+# NOTA: Esta implementación es funciónal, el problema es que se demora 10 siglos :'(
+#---------------------------------------------------------
+#pasoXGrande = np.random.normal(0,2.5,len(uniformeXGrande))
+#pasoYGrande = np.random.normal(0,2.5,len(uniformeYGrande))
+#pasoXPequeno = np.random.normal(0,2.5,len(uniformeXPequeno))
+#pasoYPequeno = np.random.normal(0,2.5,len(uniformeYPequeno))
+
+#for i in range (0,100):
+#    while (np.shape(np.where((uniformeXGrande + pasoXGrande)**2 + (uniformeYGrande + pasoYGrande)**2 < 230**0.5))[1]<len(uniformeXGrande)):
+#        pasoXGrande = np.random.normal(0,2.5,len(uniformeXGrande))
+#        pasoYGrande = np.random.normal(0,2.5,len(uniformeYGrande))
+#    
+#    while np.shape(np.where((uniformeXPequeno + pasoXPequeno)**2 + (uniformeYPequeno + pasoYPequeno)**2 < 230**0.5))[1]<len(uniformeXPequeno):
+#        pasoXPequeno = np.random.normal(0,2.5,len(uniformeXPequeno))
+#        pasoYPequeno = np.random.normal(0,2.5,len(uniformeYPequeno))
+#    
+#    uniformeXGrande = uniformeXGrande + pasoXGrande
+#    uniformeYGrande = uniformeYGrande + pasoYGrande
+#    uniformeXPequeno = uniformeXPequeno + pasoXPequeno
+#    uniformeYPequeno = uniformeYPequeno + pasoYPequeno
+
+for i in range (0,100):
+    indexcafe=np.where((uniformeXGrande**2+uniformeYGrande**2)>230)
+    indexcrema=np.where((uniformeXPequeno**2+uniformeYPequeno**2)>230)
+    while(len(indexcafe[0])>1):
+        uniformeXGrande[indexcafe]=uniformeXGrande[indexcafe] + np.random.normal(0,2.5)
+        uniformeYGrande[indexcafe]=uniformeYGrande[indexcafe] + np.random.normal(0,2.5)
+        indexcafe=np.where((uniformeXGrande**2+uniformeYGrande**2)>=230)
+    while(len(indexcrema[0])>1):
+        uniformeXPequeno[indexcrema]=uniformeXPequeno[indexcrema] + np.random.normal(0,2.5)
+        uniformeYPequeno[indexcrema]=uniformeYPequeno[indexcrema] + np.random.normal(0,2.5)
+        indexcrema=np.where((uniformeXPequeno**2+uniformeYPequeno**2)>=230)
+
+plt.figure(6,figsize = (10,10))
+plt.scatter(uniformeXGrande,uniformeYGrande,c = 'sienna',label ='cafe',s=2,alpha=0.7)
+plt.scatter(uniformeXPequeno,uniformeYPequeno, c= 'wheat',label= 'crema',s=2,alpha =0.7)
+plt.plot(x,y,x,-y,c='black',label ='taza')
+plt.title('Taza de cafe despues de la caminata aleatoria')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend(loc=0)
+plt.savefig('CafeLecheFin.pdf')
+
 
 import numpy as np
 import matplotlib.pylab as plt
@@ -336,16 +389,7 @@ import matplotlib.pylab as plt
 
 #Una posible implementacion de condiciones de frontera. Trate de hacer la suya propia sin usar esta. 
 #Si usa esta (obtiene menos puntos) debe comentar cada una de las lineas explicando en palabras que hace el codigo. Debe tambien naturalmente usar los nombres de variables que uso en el resto de su codigo propio.
-#indexcafe=np.where((xcafenuevo*xcafenuevo+ycafenuevo*ycafenuevo)>230)
-#indexcrema=np.where((xcremanuevo*xcremanuevo+ycremanuevo*ycremanuevo)>230)
-#while(len(indexcafe[0])>1):
-#	xcafenuevo[indexcafe]=xcafe[indexcafe] + np.random.normal(0,sigma)
-#	ycafenuevo[indexcafe]=ycafe[indexcafe] + np.random.normal(0,sigma)
-#	indexcafe=np.where((xcafenuevo*xcafenuevo+ycafenuevo*ycafenuevo)>=230)
-#while(len(indexcrema[0])>1):
-#	xcremanuevo[indexcrema]=xcrema[indexcrema] + np.random.normal(0,sigma)
-#	ycremanuevo[indexcrema]=ycrema[indexcrema] + np.random.normal(0,sigma)
-#	indexcrema=np.where((xcremanuevo*xcremanuevo+ycremanuevo*ycremanuevo)>=230) 
+# 
 
 
 
