@@ -35,7 +35,7 @@ int main(){
         int puntos = (t_finit - t_init)/h +1;
         Euler(X0, Y0, vX0, vY0, h, t_init, t_finit, puntos, cto);
         Leap_Frog(X0, Y0, vX0, vY0, h, t_init, t_finit, puntos, cto);
-        //Runge_Kutta(X0, Y0, vX0, vY0, h, t_init, t_finit, puntos, cto);
+        Runge_Kutta(X0, Y0, vX0, vY0, h, t_init, t_finit, puntos, cto);
         h = h*0.1;
         cto = cto +1;
     }
@@ -173,10 +173,12 @@ double Leap_Frog(double X0, double Y0, double vX0, double vY0, double h, double 
         
         /*Tiempo Anterior*/
         double vantx = v[0][0] - h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
-        double vanty = v[0][1] - h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
+        double vanty = v[0][1] - h*Dv(r[0][1],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
        /*Evolucion inicial del sistema*/
         v[1][0] = vantx + 2*h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
-        v[1][1] = vanty + 2*h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
+        v[1][1] = vanty + 2*h*Dv(r[0][1],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
+        r[1][0] = r[0][0] + h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
+        r[1][1] = r[0][1] + h*Dv(r[0][1],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
         /*Evolucion general del sistema*/
         for (int i = 1; i<puntos;i++)
         {
@@ -212,10 +214,12 @@ double Leap_Frog(double X0, double Y0, double vX0, double vY0, double h, double 
         
         /*Tiempo Anterior*/
         double vantx = v[0][0] - h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
-        double vanty = v[0][1] - h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
+        double vanty = v[0][1] - h*Dv(r[0][1],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
        /*Evolucion inicial del sistema*/
         v[1][0] = vantx + 2*h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
-        v[1][1] = vanty + 2*h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
+        v[1][1] = vanty + 2*h*Dv(r[0][1],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
+        r[1][0] = r[0][0] + h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
+        r[1][1] = r[0][1] + h*Dv(r[0][1],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
         /*Evolucion general del sistema*/
         for (int i = 1; i<puntos;i++)
         {
