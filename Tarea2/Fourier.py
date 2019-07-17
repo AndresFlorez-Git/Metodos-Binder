@@ -70,10 +70,10 @@ plt.colorbar()
 #-------------------------------------------------------------------
 # Se aplica el filtro:
 
-FiltrofourieFotoFeliz = filtroPasaAltas(FiltrofourieFotoFeliz,50)
+FiltrofourieFotoFeliz = filtroPasaAltas(FiltrofourieFotoFeliz,1)
 
 
-FiltrofourieFotoSeria = filtroPasaBajas(FiltrofourieFotoSeria,50)
+FiltrofourieFotoSeria = filtroPasaBajas(FiltrofourieFotoSeria,500)
 #---------------------------------------------------------------------
 plt.subplot(6,2,7)
 plt.imshow(abs(FiltrofourieFotoFeliz),cmap = 'plasma',norm = LogNorm())
@@ -112,4 +112,4 @@ plt.subplot(6,2,(11,12))
 plt.imshow(abs(FotoReultado),cmap = 'gray')
 plt.title('Foto Híbrida')
 
-plt.savefig('FFT2D.png')
+plt.savefig('FFT2D.pdf')
