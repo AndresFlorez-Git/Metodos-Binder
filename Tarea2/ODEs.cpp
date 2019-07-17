@@ -10,7 +10,7 @@ double yr = 31536000; // segundos al año
 double G = G1*(1/(UA*UA*UA))*(M)*(yr*yr); // Constante de gravitacion universal [UA^3 /(Masa_Solar yr^2)]
 
 double Euler(double, double, double, double, double, double, double, int, int);
-
+double Leap_Frog(double, double, double, double, double, double, double, int, int);
 double Runge_Kutta(double, double, double, double, double, double, double, int, int);
 
 int main(){
@@ -34,7 +34,8 @@ int main(){
     {
         int puntos = (t_finit - t_init)/h +1;
         Euler(X0, Y0, vX0, vY0, h, t_init, t_finit, puntos, cto);
-        Runge_Kutta(X0, Y0, vX0, vY0, h, t_init, t_finit, puntos, cto);
+        Leap_Frog(X0, Y0, vX0, vY0, h, t_init, t_finit, puntos, cto);
+        //Runge_Kutta(X0, Y0, vX0, vY0, h, t_init, t_finit, puntos, cto);
         h = h*0.1;
         cto = cto +1;
     }
@@ -72,13 +73,15 @@ double Euler(double X0, double Y0, double vX0, double vY0, double h, double t_in
             v[0][0] = vX0;
             v[0][1] = vY0;
        /*Evolucin del sistema*/
-        for (int i = 1; i<puntos;i++)
+        for (int i = 0; i<puntos;i++)
         {
-            r[i][0] = r[i-1][0] + v[i-1][0]*h;
-            r[i][1] = r[i-1][1] + v[i-1][1]*h;
-            v[i][0] = v[i-1][0] + Dv(r[i-1][0],pow(r[i-1][0]*r[i-1][0]+r[i-1][1]*r[i-1][1],0.5));
-            v[i][1] = v[i-1][1] + Dv(r[i-1][1],pow(r[i-1][0]*r[i-1][0]+r[i-1][1]*r[i-1][1],0.5));
-            t[i] = t[i-1] + h;
+            
+            v[i+1][0] = v[i][0] + h*Dv(r[i][0],pow(r[i][0]*r[i][0]+r[i][1]*r[i][1],0.5));
+            v[i+1][1] = v[i][1] + h*Dv(r[i][1],pow(r[i][0]*r[i][0]+r[i][1]*r[i][1],0.5));
+            r[i+1][0] = r[i][0] + v[i][0]*h;
+            r[i+1][1] = r[i][1] + v[i][1]*h;
+            
+            t[i+1] = t[i] + h;
         }
         for(int i = 0; i< puntos; i++)
         {
@@ -102,13 +105,14 @@ double Euler(double X0, double Y0, double vX0, double vY0, double h, double t_in
             v[0][0] = vX0;
             v[0][1] = vY0;
        /*Evolucin del sistema*/
-        for (int i = 1; i<puntos;i++)
+        for (int i = 0; i<puntos;i++)
         {
-            r[i][0] = r[i-1][0] + v[i-1][0]*h;
-            r[i][1] = r[i-1][1] + v[i-1][1]*h;
-            v[i][0] = v[i-1][0] + Dv(r[i][0],pow(r[i][0]*r[i][0]+r[i][1]*r[i][1],0.5));
-            v[i][1] = v[i-1][1] + Dv(r[i][1],pow(r[i][0]*r[i][0]+r[i][1]*r[i][1],0.5));
-            t[i] = t[i-1] + h;
+            v[i+1][0] = v[i][0] + h*Dv(r[i][0],pow(r[i][0]*r[i][0]+r[i][1]*r[i][1],0.5));
+            v[i+1][1] = v[i][1] + h*Dv(r[i][1],pow(r[i][0]*r[i][0]+r[i][1]*r[i][1],0.5));
+            r[i+1][0] = r[i][0] + v[i][0]*h;
+            r[i+1][1] = r[i][1] + v[i][1]*h;
+            
+            t[i+1] = t[i] + h;
         }
         for(int i = 0; i< puntos; i++)
         {
@@ -132,13 +136,14 @@ double Euler(double X0, double Y0, double vX0, double vY0, double h, double t_in
             v[0][0] = vX0;
             v[0][1] = vY0;
        /*Evolucin del sistema*/
-        for (int i = 1; i<puntos;i++)
+        for (int i = 0; i<puntos;i++)
         {
-            r[i][0] = r[i-1][0] + v[i-1][0]*h;
-            r[i][1] = r[i-1][1] + v[i-1][1]*h;
-            v[i][0] = v[i-1][0] + Dv(r[i][0],pow(r[i][0]*r[i][0]+r[i][1]*r[i][1],0.5));
-            v[i][1] = v[i-1][1] + Dv(r[i][1],pow(r[i][0]*r[i][0]+r[i][1]*r[i][1],0.5));
-            t[i] = t[i-1] + h;
+            v[i+1][0] = v[i][0] + h*Dv(r[i][0],pow(r[i][0]*r[i][0]+r[i][1]*r[i][1],0.5));
+            v[i+1][1] = v[i][1] + h*Dv(r[i][1],pow(r[i][0]*r[i][0]+r[i][1]*r[i][1],0.5));
+            r[i+1][0] = r[i][0] + v[i][0]*h;
+            r[i+1][1] = r[i][1] + v[i][1]*h;
+            
+            t[i+1] = t[i] + h;
         }
         for(int i = 0; i< puntos; i++)
         {
@@ -147,6 +152,129 @@ double Euler(double X0, double Y0, double vX0, double vY0, double h, double t_in
         Euler3.close();
     }
 }
+
+double Leap_Frog(double X0, double Y0, double vX0, double vY0, double h, double t_init, double t_finit, int puntos, int cto)
+{
+    if (cto ==1)
+    {
+        ofstream LeapFrog1;
+        LeapFrog1.open("LeapFrog1.dat");
+     /*Se declara los Arrays a utilizar*/
+        double t[puntos];
+        double r[puntos][2];
+        double v[puntos][2];
+      /* Condiciones iniciales del problema:*/
+            
+            t[0] = t_init;
+            r[0][0] = X0;
+            r[0][1] = Y0;
+            v[0][0] = vX0;
+            v[0][1] = vY0;
+        
+        /*Tiempo Anterior*/
+        double vantx = v[0][0] - h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
+        double vanty = v[0][1] - h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
+       /*Evolucion inicial del sistema*/
+        v[1][0] = vantx + 2*h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
+        v[1][1] = vanty + 2*h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
+        /*Evolucion general del sistema*/
+        for (int i = 1; i<puntos;i++)
+        {
+            
+            v[i+1][0] = v[i-1][0] + 2.0*h*Dv(r[i][0],pow(r[i][0]*r[i][0]+r[i][1]*r[i][1],0.5));
+            v[i+1][1] = v[i-1][1] + 2.0*h*Dv(r[i][1],pow(r[i][0]*r[i][0]+r[i][1]*r[i][1],0.5));
+            r[i+1][0] = r[i-1][0] + 2.0*v[i][0]*h;
+            r[i+1][1] = r[i-1][1] + 2.0*v[i][1]*h;
+            
+            t[i+1] = t[i] + h;
+        }
+        for(int i = 0; i< puntos; i++)
+        {
+             LeapFrog1<<t[i]<<","<<r[i][0]<<","<<r[i][1]<<","<<v[i][0]<<","<<v[i][1]<< endl ;
+        }  
+        LeapFrog1.close();
+    }
+    if (cto ==2)
+    {
+        ofstream LeapFrog2;
+        LeapFrog2.open("LeapFrog2.dat");
+     /*Se declara los Arrays a utilizar*/
+        double t[puntos];
+        double r[puntos][2];
+        double v[puntos][2];
+      /* Condiciones iniciales del problema:*/
+            
+            t[0] = t_init;
+            r[0][0] = X0;
+            r[0][1] = Y0;
+            v[0][0] = vX0;
+            v[0][1] = vY0;
+        
+        /*Tiempo Anterior*/
+        double vantx = v[0][0] - h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
+        double vanty = v[0][1] - h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
+       /*Evolucion inicial del sistema*/
+        v[1][0] = vantx + 2*h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
+        v[1][1] = vanty + 2*h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
+        /*Evolucion general del sistema*/
+        for (int i = 1; i<puntos;i++)
+        {
+            
+            v[i+1][0] = v[i-1][0] + 2.0*h*Dv(r[i][0],pow(r[i][0]*r[i][0]+r[i][1]*r[i][1],0.5));
+            v[i+1][1] = v[i-1][1] + 2.0*h*Dv(r[i][1],pow(r[i][0]*r[i][0]+r[i][1]*r[i][1],0.5));
+            r[i+1][0] = r[i-1][0] + 2.0*v[i][0]*h;
+            r[i+1][1] = r[i-1][1] + 2.0*v[i][1]*h;
+            
+            t[i+1] = t[i] + h;
+        }
+        for(int i = 0; i< puntos; i++)
+        {
+             LeapFrog2<<t[i]<<","<<r[i][0]<<","<<r[i][1]<<","<<v[i][0]<<","<<v[i][1]<< endl ;
+        }  
+        LeapFrog2.close();
+    }
+    if (cto ==3)
+    {
+        ofstream LeapFrog3;
+        LeapFrog3.open("LeapFrog3.dat");
+     /*Se declara los Arrays a utilizar*/
+        double t[puntos];
+        double r[puntos][2];
+        double v[puntos][2];
+      /* Condiciones iniciales del problema:*/
+            
+            t[0] = t_init;
+            r[0][0] = X0;
+            r[0][1] = Y0;
+            v[0][0] = vX0;
+            v[0][1] = vY0;
+        
+        /*Tiempo Anterior*/
+        double vantx = v[0][0] - h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
+        double vanty = v[0][1] - h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
+       /*Evolucion inicial del sistema*/
+        v[1][0] = vantx + 2*h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
+        v[1][1] = vanty + 2*h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
+        /*Evolucion general del sistema*/
+        for (int i = 1; i<puntos;i++)
+        {
+            
+            v[i+1][0] = v[i-1][0] + 2.0*h*Dv(r[i][0],pow(r[i][0]*r[i][0]+r[i][1]*r[i][1],0.5));
+            v[i+1][1] = v[i-1][1] + 2.0*h*Dv(r[i][1],pow(r[i][0]*r[i][0]+r[i][1]*r[i][1],0.5));
+            r[i+1][0] = r[i-1][0] + 2.0*v[i][0]*h;
+            r[i+1][1] = r[i-1][1] + 2.0*v[i][1]*h;
+            
+            t[i+1] = t[i] + h;
+        }
+        for(int i = 0; i< puntos; i++)
+        {
+             LeapFrog3<<t[i]<<","<<r[i][0]<<","<<r[i][1]<<","<<v[i][0]<<","<<v[i][1]<< endl ;
+        }  
+        LeapFrog3.close();
+    }
+    
+}
+
 
 
 
