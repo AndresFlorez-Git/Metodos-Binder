@@ -9,7 +9,7 @@ double M = 1.989e30; // masa del sol
 double yr = 31536000; // segundos al año
 double G = G1*(1/(UA*UA*UA))*(M)*(yr*yr); // Constante de gravitacion universal [UA^3 /(Masa_Solar yr^2)]
 
-//double Euler();
+double Euler(double, double, double, double, double, double, double, int, int);
 
 double Runge_Kutta(double, double, double, double, double, double, double, int, int);
 
@@ -33,6 +33,7 @@ int main(){
     for(int i = 0;i<3;i++)
     {
         int puntos = (t_finit - t_init)/h +1;
+        Euler(X0, Y0, vX0, vY0, h, t_init, t_finit, puntos, cto);
         Runge_Kutta(X0, Y0, vX0, vY0, h, t_init, t_finit, puntos, cto);
         h = h*0.1;
         cto = cto +1;
@@ -50,14 +51,103 @@ double Dx(double v)
 
 double Dv(double r, double mag_r)
 {
-    return -G*1.0*r/(mag_r*mag_r*mag_r);
+    return -G*r/(mag_r*mag_r*mag_r);
 }
-/*
-double Euler()
+
+double Euler(double X0, double Y0, double vX0, double vY0, double h, double t_init, double t_finit, int puntos, int cto)
 {
-    
+    if (cto ==1)
+    {
+        ofstream Euler1;
+        Euler1.open("Euler1.dat");
+     /*Se declara los Arrays a utilizar*/
+        double t[puntos];
+        double r[puntos][2];
+        double v[puntos][2];
+      /* Condiciones iniciales del problema:*/
+            
+            t[0] = t_init;
+            r[0][0] = X0;
+            r[0][1] = Y0;
+            v[0][0] = vX0;
+            v[0][1] = vY0;
+       /*Evolucin del sistema*/
+        for (int i = 1; i<puntos;i++)
+        {
+            r[i][0] = r[i-1][0] + v[i-1][0]*h;
+            r[i][1] = r[i-1][1] + v[i-1][1]*h;
+            v[i][0] = v[i-1][0] + Dv(r[i][0],pow(r[i][0]*r[i][0]+r[i][1]*r[i][1],0.5));
+            v[i][1] = v[i-1][1] + Dv(r[i][1],pow(r[i][0]*r[i][0]+r[i][1]*r[i][1],0.5));
+            t[i] = t[i-1] + h;
+        }
+        for(int i = 0; i< puntos; i++)
+        {
+             Euler1<<t[i]<<","<<r[i][0]<<","<<r[i][1]<<","<<v[i][0]<<","<<v[i][1]<< endl ;
+        }  
+        Euler1.close();
+    }
+    if (cto ==2)
+    {
+        ofstream Euler2;
+        Euler2.open("Euler2.dat");
+     /*Se declara los Arrays a utilizar*/
+        double t[puntos];
+        double r[puntos][2];
+        double v[puntos][2];
+      /* Condiciones iniciales del problema:*/
+            
+            t[0] = t_init;
+            r[0][0] = X0;
+            r[0][1] = Y0;
+            v[0][0] = vX0;
+            v[0][1] = vY0;
+       /*Evolucin del sistema*/
+        for (int i = 1; i<puntos;i++)
+        {
+            r[i][0] = r[i-1][0] + v[i-1][0]*h;
+            r[i][1] = r[i-1][1] + v[i-1][1]*h;
+            v[i][0] = v[i-1][0] + Dv(r[i][0],pow(r[i][0]*r[i][0]+r[i][1]*r[i][1],0.5));
+            v[i][1] = v[i-1][1] + Dv(r[i][1],pow(r[i][0]*r[i][0]+r[i][1]*r[i][1],0.5));
+            t[i] = t[i-1] + h;
+        }
+        for(int i = 0; i< puntos; i++)
+        {
+             Euler2<<t[i]<<","<<r[i][0]<<","<<r[i][1]<<","<<v[i][0]<<","<<v[i][1]<< endl ;
+        }  
+        Euler2.close();
+    }
+    if (cto ==3)
+    {
+        ofstream Euler3;
+        Euler3.open("Euler3.dat");
+     /*Se declara los Arrays a utilizar*/
+        double t[puntos];
+        double r[puntos][2];
+        double v[puntos][2];
+      /* Condiciones iniciales del problema:*/
+            
+            t[0] = t_init;
+            r[0][0] = X0;
+            r[0][1] = Y0;
+            v[0][0] = vX0;
+            v[0][1] = vY0;
+       /*Evolucin del sistema*/
+        for (int i = 1; i<puntos;i++)
+        {
+            r[i][0] = r[i-1][0] + v[i-1][0]*h;
+            r[i][1] = r[i-1][1] + v[i-1][1]*h;
+            v[i][0] = v[i-1][0] + Dv(r[i][0],pow(r[i][0]*r[i][0]+r[i][1]*r[i][1],0.5));
+            v[i][1] = v[i-1][1] + Dv(r[i][1],pow(r[i][0]*r[i][0]+r[i][1]*r[i][1],0.5));
+            t[i] = t[i-1] + h;
+        }
+        for(int i = 0; i< puntos; i++)
+        {
+             Euler3<<t[i]<<","<<r[i][0]<<","<<r[i][1]<<","<<v[i][0]<<","<<v[i][1]<< endl ;
+        } 
+        Euler3.close();
+    }
 }
-*/
+
 
 
 double Runge_Kutta(double X0, double Y0, double vX0, double vY0, double h, double t_init, double t_finit, int puntos, int cto)
