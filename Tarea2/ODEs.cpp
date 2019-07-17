@@ -177,8 +177,8 @@ double Leap_Frog(double X0, double Y0, double vX0, double vY0, double h, double 
        /*Evolucion inicial del sistema*/
         v[1][0] = vantx + 2*h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
         v[1][1] = vanty + 2*h*Dv(r[0][1],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
-        r[1][0] = r[0][0] + h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
-        r[1][1] = r[0][1] + h*Dv(r[0][1],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
+        r[1][0] = r[0][0] + h*v[0][0];
+        r[1][1] = r[0][1] + h*v[0][1];
         /*Evolucion general del sistema*/
         for (int i = 1; i<puntos;i++)
         {
@@ -218,8 +218,8 @@ double Leap_Frog(double X0, double Y0, double vX0, double vY0, double h, double 
        /*Evolucion inicial del sistema*/
         v[1][0] = vantx + 2*h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
         v[1][1] = vanty + 2*h*Dv(r[0][1],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
-        r[1][0] = r[0][0] + h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
-        r[1][1] = r[0][1] + h*Dv(r[0][1],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
+        r[1][0] = r[0][0] + h*v[0][0];
+        r[1][1] = r[0][1] + h*v[0][1];
         /*Evolucion general del sistema*/
         for (int i = 1; i<puntos;i++)
         {
@@ -259,6 +259,8 @@ double Leap_Frog(double X0, double Y0, double vX0, double vY0, double h, double 
        /*Evolucion inicial del sistema*/
         v[1][0] = vantx + 2*h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
         v[1][1] = vanty + 2*h*Dv(r[0][0],pow(r[0][0]*r[0][0]+r[0][1]*r[0][1],0.5));
+        r[1][0] = r[0][0] + h*v[0][0];
+        r[1][1] = r[0][1] + h*v[0][1];
         /*Evolucion general del sistema*/
         for (int i = 1; i<puntos;i++)
         {
