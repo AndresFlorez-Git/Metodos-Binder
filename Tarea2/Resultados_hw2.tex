@@ -1,0 +1,96 @@
+\documentclass{article} %tipo de documento
+\usepackage[utf8]{inputenc}
+\usepackage{subfigure}  %subfiguras
+\usepackage{float}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{endnotes}
+\date{\today}
+\usepackage{natbib}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{graphicx} %gráficas
+\setlength{\textwidth}{170mm}
+\setlength{\textheight}{230mm}
+\setlength{\topmargin}{-15mm}
+\setlength{\oddsidemargin}{-3mm}
+\setlength{\evensidemargin}{30mm}
+\title{Resultados Tarea 2 Métodos Computacionales}
+\author{Andrés Felipe Flórez Sierra - af.florez12@uniandes.edu.co\\Universidad de los Andes}
+
+\date{July 2019}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+En el presente documento se exponen los resultados obtenidos en la realización de la tarea 2 de Métodos computacionales.
+\section{Fourier en manejo de imágenes}
+Se presentan los resultados de la creación de una imagen híbrida a partir de dos fotografías distintas.
+\subsection{Proceso}\label{sub:proces_fourier}
+Para la creación de la imagen hibrida utilizando el lenguaje de programación Python 3.7 es la siguiente:
+\begin{itemize}
+    \item Se importan las las fotografías, en este caso; cara\_02\_risesMF.png y de cara\_03\_grisesMF.png.
+    \item Se obtiene el espectro de fourier de cada una de las imágenes.
+    \item Se obtiene las frecuencias asociadas a las amplitudes del espectro de fourier.En este punto es necesario identificar la información frecuencial que se desee filtrar por el filtro gaussiano, que en este caso se puede aproximar a la implementación de dos filtros; Pasa-Altas y Pasa-Bajas.
+    \item Se aplican los filtros respectivos a cada una de las imágenes dependiendo de la información identificada en las frecuencias asociadas a las amplitudes del espectro de fourier.
+    \item Se visualiza el espectro de fourier para verificar la aplicación del filtro.
+    \item Se combina la información de las amplitudes del espectro de fourier en una sola imagen, la cual sera el resultado.
+    \item para visualizar la imagen híbrida, se aplica la transformada inversa de fourier.
+\end{itemize}
+
+\subsection{Resultado}
+Los resultados presentados en la figura \ref{fig:proces_fourier}  cumplen con el orden expuesto en la sección  (\ref{sub:proces_fourier}).
+\begin{figure}[H]
+    \includegraphics[height=23cm,width=20cm]{FFT2D.png}
+    \caption{Proceso para obtener la imagen híbrida }
+    \label{fig:proces_fourier}
+\end{figure}
+\section{ODEs, movimiento orbital}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=20cm,width=20cm]{Posicion_Orbital.png}
+    \caption{Posición Orbital}
+    \label{fig:Posicion_Orbital}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=20cm,width=20cm]{Velocidad_Orbital.png}
+    \caption{Velocidad Orbital}
+    \label{fig:Velocidad_Orbital}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=20cm,width=20cm]{Momentum_Angular.png}
+    \caption{Momentum Angular}
+    \label{fig:Momentum_Angular}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=20cm,width=20cm]{Energia_Euler.png}
+    \caption{Energía Euler}
+    \label{fig:Energia_Euler}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=20cm,width=20cm]{Energia_LeapFrog.png}
+    \caption{Energia LeapFrog}
+    \label{fig:Energia_LeapFrog}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=20cm,width=20cm]{Energia_RK.png}
+    \caption{Energia Runge-Kutta}
+    \label{fig:Energia_RK}
+\end{figure}
+
+
+\end{document}
