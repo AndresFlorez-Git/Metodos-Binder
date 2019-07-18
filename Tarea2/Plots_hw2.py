@@ -587,15 +587,3 @@ plt.savefig('Energia_RK.png')
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
