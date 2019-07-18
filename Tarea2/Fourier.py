@@ -112,4 +112,4 @@ plt.subplot(6,2,(11,12))
 plt.imshow(abs(FotoReultado),cmap = 'gray')
 plt.title('Foto Híbrida')
 
-plt.savefig('FFT2D.pdf')
+plt.savefig('FFT2D.png')
