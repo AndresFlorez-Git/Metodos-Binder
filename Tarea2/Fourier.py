@@ -45,11 +45,11 @@ plt.title('Foto Seria')
 #plt.colorbar()
 plt.subplot(6,2,3)
 plt.imshow(abs(fourieFotoFeliz),cmap = 'plasma',norm = LogNorm())
-plt.title('Espectro de fourie Foto Feliz')
+plt.title('Espectro de fourier Foto Feliz')
 plt.colorbar()
 plt.subplot(6,2,4)
 plt.imshow(abs(fourieFotoSeria),cmap = 'plasma',norm = LogNorm())
-plt.title('Espectro de fourie Foto Seria')
+plt.title('Espectro de fourier Foto Seria')
 plt.colorbar()
 #-------------------------------------------------------------------
 # Se visualiza el rango de frecuencias del dominio de fourier:
@@ -61,11 +61,11 @@ FiltrofourieFotoSeria = np.fft.fftshift(fourieFotoSeria)
 #---------------------------------------------------------------------
 plt.subplot(6,2,5)
 plt.imshow(abs(FiltrofourieFotoFeliz),cmap = 'plasma',norm = LogNorm())
-plt.title('Espectro de fourie Foto Feliz Frecuencias')
+plt.title('Espectro de fourier Foto Feliz Frecuencias')
 plt.colorbar()
 plt.subplot(6,2,6)
 plt.imshow(abs(FiltrofourieFotoSeria),cmap = 'plasma',norm = LogNorm())
-plt.title('Espectro de fourie Foto Seria Frecuencias')
+plt.title('Espectro de fourier Foto Seria Frecuencias')
 plt.colorbar()
 #-------------------------------------------------------------------
 # Se aplica el filtro:
@@ -77,11 +77,11 @@ FiltrofourieFotoSeria = filtroPasaBajas(FiltrofourieFotoSeria,500)
 #---------------------------------------------------------------------
 plt.subplot(6,2,7)
 plt.imshow(abs(FiltrofourieFotoFeliz),cmap = 'plasma',norm = LogNorm())
-plt.title('Frecuencias de fourie Foto Feliz Frecuencias Filtradas')
+plt.title('Frecuencias de fourier Foto Feliz Frecuencias Filtradas')
 plt.colorbar()
 plt.subplot(6,2,8)
 plt.imshow(abs(FiltrofourieFotoSeria),cmap = 'plasma',norm = LogNorm())
-plt.title('Frecuencias de fourie Foto Seria Frecuencias Filtradas')
+plt.title('Frecuencias de fourier Foto Seria Frecuencias Filtradas')
 plt.colorbar()
 #-------------------------------------------------------------------
 # Se visualiza la el espectro de furier con frecuencias filtradas:
@@ -93,11 +93,11 @@ fourieFotoSeriaFiltrada = np.fft.ifftshift(FiltrofourieFotoSeria)
 #---------------------------------------------------------------------
 plt.subplot(6,2,9)
 plt.imshow(abs(fourieFotoFelizFiltrada),cmap = 'plasma',norm = LogNorm())
-plt.title('Espectro de fourie Foto Feliz Filtradas')
+plt.title('Espectro de fourier Foto Feliz Filtradas')
 plt.colorbar()
 plt.subplot(6,2,10)
 plt.imshow(abs(fourieFotoSeriaFiltrada),cmap = 'plasma',norm = LogNorm())
-plt.title('Espectro de fourie Foto Seria Filtradas')
+plt.title('Espectro de fourier Foto Seria Filtradas')
 plt.colorbar()
 
 #-------------------------------------------------------------------
