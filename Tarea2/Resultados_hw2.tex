@@ -49,7 +49,9 @@ Los resultados presentados en la figura \ref{fig:proces_fourier}  cumplen con el
     \label{fig:proces_fourier}
 \end{figure}
 \section{ODEs, movimiento orbital}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+En la figura \ref{fig:Posicion_Orbital} se evidencia que los métodos LeapFrog y Runge-Kutta son los más efectivos para calcular las posiciones orbitales. El método de Euler presenta resultados de baja con fiabilidad para dt bajos.
 \begin{figure}[H]
     \centering
     \includegraphics[height=20cm,width=20cm]{Posicion_Orbital.png}
@@ -57,6 +59,7 @@ Los resultados presentados en la figura \ref{fig:proces_fourier}  cumplen con el
     \label{fig:Posicion_Orbital}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Se evidencia en la figura \ref{fig:Velocidad_Orbital}, que los métodos LeapFrog y Runge-Kutta son los más efectivos para calcular las velocidades orbitales. El método de Euler presenta resultados de baja con fiabilidad para dt bajos. El resultado se degrada entre mas tiempo pasa.
 \begin{figure}[H]
     \centering
     \includegraphics[height=20cm,width=20cm]{Velocidad_Orbital.png}
@@ -64,6 +67,7 @@ Los resultados presentados en la figura \ref{fig:proces_fourier}  cumplen con el
     \label{fig:Velocidad_Orbital}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Se evidencia en la figura \ref{fig:Momentum_Angular} que los métodos de LeapFrog y Runge-Kutta conservan el momento angular, sin embargo el método de Euler no.
 \begin{figure}[H]
     \centering
     \includegraphics[height=20cm,width=20cm]{Momentum_Angular.png}
@@ -71,6 +75,7 @@ Los resultados presentados en la figura \ref{fig:proces_fourier}  cumplen con el
     \label{fig:Momentum_Angular}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Se evidencia en la figura \ref{fig:Energia_Euler} el análisis energético del método de Euler, dando como resultado que la energía no se conserva. 
 \begin{figure}[H]
     \centering
     \includegraphics[height=20cm,width=20cm]{Energia_Euler.png}
@@ -78,6 +83,7 @@ Los resultados presentados en la figura \ref{fig:proces_fourier}  cumplen con el
     \label{fig:Energia_Euler}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Se evidencia en la figura \ref{fig:Energia_LeapFrog} el análisis energético del método de LeapFrog, dando como resultado que la energía se conserva. 
 \begin{figure}[H]
     \centering
     \includegraphics[height=20cm,width=20cm]{Energia_LeapFrog.png}
@@ -85,6 +91,7 @@ Los resultados presentados en la figura \ref{fig:proces_fourier}  cumplen con el
     \label{fig:Energia_LeapFrog}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Se evidencia en la figura \ref{fig:Energia_RK} el análisis energético del método de Runge-Kutta, dando como resultado que la energía No se conserva. 
 \begin{figure}[H]
     \centering
     \includegraphics[height=20cm,width=20cm]{Energia_RK.png}
